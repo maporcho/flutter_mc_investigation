@@ -33,7 +33,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  final xablau = Xablau();
+
   static const platform = MethodChannel('sample.method.channel');
+
+  @override
+  void initState() {
+    super.initState();
+    print('_MyHomePageState: setting method call handler');
+    platform.setMethodCallHandler((_) {
+      print("_MyHomePageState: handling call");
+      return Future.value();
+    });
+  }
 
   void _incrementCounter() async {
     int i;
@@ -46,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
       while (--i >= 0) {
         platform.invokeMethod('getBatteryLevel',
             {'key': 'value', 'aBoolean': false, 'source': '_MyHomePageState'});
-        Xablau.lala();
+        xablau.lala();
       }
     });
   }

@@ -15,12 +15,11 @@ import Flutter
     mc.setMethodCallHandler({
       (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
         let args = call.arguments as! Dictionary<String, Any>
-//        let aBoolean_NSNumber = (args["aBoolean"] as? NSNumber)?.boolValue
-//        let aBoolean_Bool = args["aBoolean"] as? Bool
-//        print("vovo - aBoolean_NSNumber: \(aBoolean_NSNumber)")
-//        print("vovo - aBoolean_Bool: \(aBoolean_Bool)")
         print("vovo - args: \(args)")
-    })                               
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            mc.invokeMethod("nativeCallSomeFlutterMethod", arguments: nil)
+        }
+    })
 
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
