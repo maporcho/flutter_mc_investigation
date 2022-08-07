@@ -4,7 +4,10 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+A simple project to investigate the behavior of:
+
+- multiple method call handlers in the Flutter side
+- multiple declarations and usage of the same method channel in the Flutter side
 
 A few resources to get you started if this is your first Flutter project:
 
