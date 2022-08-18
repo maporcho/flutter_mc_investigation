@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
 class SomeMethodChannelManager {
-  static const mc = MethodChannel('sample.method.channel');
+  final mc = MethodChannel('sample.method.channel');
 
   SomeMethodChannelManager() {
     print("vovo - SomeMethodChannelManager - setting call handler");

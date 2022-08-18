@@ -15,7 +15,7 @@ class MainActivity: FlutterActivity() {
         super.configureFlutterEngine(flutterEngine)
         channel.setMethodCallHandler {
             call, result ->
-                Log.d("android", "${call.arguments}");
+                Log.d("vovo", "android got: ${call.method} ${call.arguments}");
                 channel.invokeMethod("callBack", "data1")
         }
 
