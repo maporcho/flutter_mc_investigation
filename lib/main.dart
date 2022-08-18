@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mc_investigation/xablau.dart';
+import 'package:flutter_mc_investigation/some_method_channel_manager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,20 +34,27 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   static const platform = MethodChannel('sample.method.channel');
+ 
+  final mcManager = SomeMethodChannelManager();
+
+  @override
+  void initState() {
+    print("vovo - _MyHomePageState - setting call handler");
+    platform.setMethodCallHandler((call) {
+      print('''vovo - _MyHomePageState handling call. 
+          Method: ${call.method}, argument: ${call.arguments}''');
+      return Future.value('');
+    });
+  }
 
   void _incrementCounter() async {
-    int i;
-
     setState(() {
       _counter++;
-      print(_counter);
-      i = _counter;
 
-      while (--i >= 0) {
-        platform.invokeMethod('getBatteryLevel',
-            {'key': 'value', 'aBoolean': false, 'source': '_MyHomePageState'});
-        Xablau.lala();
-      }
+      platform.invokeMethod('sampleMethod',
+          {'key': 'value', 'aBoolean': false, 'source': '_MyHomePageState'});
+
+      mcManager.invokeMethodChannel();
     });
   }
 

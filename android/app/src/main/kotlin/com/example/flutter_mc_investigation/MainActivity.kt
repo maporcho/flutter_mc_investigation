@@ -10,10 +10,15 @@ class MainActivity: FlutterActivity() {
     private val CHANNEL = "sample.method.channel"
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
+
+        val channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
         super.configureFlutterEngine(flutterEngine)
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
-        call, result ->
-            Log.d("android", "${call.arguments}");
+        channel.setMethodCallHandler {
+            call, result ->
+                Log.d("android", "${call.arguments}");
+                channel.invokeMethod("callBack", "data1")
         }
+
+        
     }
 }
